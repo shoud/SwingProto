@@ -1,0 +1,7 @@
+git status
+
+git commit -am "SALUT"
+git add *
+
+git push
+git pull
