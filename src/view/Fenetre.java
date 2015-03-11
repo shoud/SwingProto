@@ -61,7 +61,7 @@ public class Fenetre extends JFrame {
 
         //L'arbre des fichiers
         File fileArbre = new File(".");
-        ArbreChemin arbrePanel = new ArbreChemin(fileArbre);
+        ArbreChemin arbrePanel = new ArbreChemin();
         arbrePanel.setBackground(Color.cyan);
         arbrePanel.setPreferredSize(new Dimension(200, 670));
 

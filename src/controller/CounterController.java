@@ -2,7 +2,10 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+
 import model.CounterModel;
+import model.Path;
 import view.GuiView;
 
 /**
@@ -16,7 +19,6 @@ public class CounterController implements ActionListener
     private GuiView m_view;
 
     //Variable de l'image courante
-
 
 
     /**
