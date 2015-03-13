@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import controller.CounterController;
 import model.CounterModel;
+import model.PImage;
 
 import java.awt.*;
 import java.io.File;
@@ -20,7 +21,7 @@ public class GuiView implements Observer {
     private ArbreChemin arbrePanel;
     private JButton btPrecedent;
     private JTextField titreImage;
-    private ImageCourante imageCourante;
+    private PImage imageCourante;
     private JPanel imageCourantePanel;
 
     /**
@@ -80,12 +81,15 @@ public class GuiView implements Observer {
         arbrePanel.setPreferredSize(new Dimension(200, 670));
 
         //Image courante
-        imageCourantePanel = new JPanel();
-        imageCourantePanel.setPreferredSize(new Dimension(400, 300));
-        imageCourante = new ImageCourante(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.jpg"));
+        /*imageCourantePanel = new JPanel();
+        imageCourantePanel.setPreferredSize(new Dimension(400, 300));*/
+        imageCourante = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.jpg"));
         imageCourante.setBackground(Color.BLUE);
         imageCourante.setPreferredSize(new Dimension(400, 300));
-        imageCourantePanel.add(imageCourante);
+        //imageCourantePanel.add(imageCourante);
+        /*ImageIcon imageIcon = new ImageIcon("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.jpg");
+        JLabel label = new JLabel(imageIcon);
+        imageCourantePanel.add(label);*/
 
         //Titre de l'image courante
         JPanel titreImagePanel = new JPanel();
@@ -176,7 +180,7 @@ public class GuiView implements Observer {
         //On positionne la case de départ du composant
         gbc.gridx = 1;
         gbc.gridheight = 2;
-        content.add(imageCourantePanel, gbc);
+        content.add(imageCourante, gbc); //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
         //---------------------------------------------
         //On positionne la case de départ du composant
         gbc.gridx = 3;
@@ -240,9 +244,8 @@ public class GuiView implements Observer {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 //titreImage.setText("" + m_model.getValue());
-                imageCourantePanel.remove(imageCourante);
-                imageCourante = new ImageCourante(m_model.getFile());
-                imageCourantePanel.add(imageCourante);
+                imageCourante.setImage(m_model.getFile());
+
             }
         });
     }

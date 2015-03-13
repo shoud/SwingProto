@@ -1,6 +1,6 @@
 package model;
 
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -9,11 +9,13 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-public class PImage extends JButton {
+public class PImage extends JPanel
+{
 
     private BufferedImage image;
     private JLabel picLabel;
     private File file;
+    private ImageIcon imageIcon;
 
     public PImage()
     {
@@ -22,19 +24,24 @@ public class PImage extends JButton {
             ///home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif
             file = new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif");
             image = ImageIO.read(file);
-            picLabel = new JLabel(new ImageIcon(image));
+            //this.setIcon((Icon) image);
         }catch (IOException ex)
         {
             System.out.println("Impossible d'ouvrir l'image par defaut");
         }
     }
-    public PImage(String chemin)
+    public PImage(File file)
     {
         try
         {
-            file = new File(chemin);
+            this.file = file;
             image = ImageIO.read(file);
-            picLabel = new JLabel(new ImageIcon(image));
+            //ImageIcon imageIcon = new ImageIcon("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.jpg");
+            //this.setIcon(imageIcon);
+            ImageIcon imageIcon = new ImageIcon(image);
+            picLabel = new JLabel(imageIcon);
+            picLabel.setPreferredSize(new Dimension(400, 300));
+            this.add(picLabel);
         }catch (IOException ex)
         {
             System.out.println("Impossible d'ouvrir l'image par defaut");
@@ -42,18 +49,26 @@ public class PImage extends JButton {
     }
     public void setImage(File file)
     {
-        try
+        if(file != null)
         {
-            image = ImageIO.read(file);
-            picLabel = new JLabel(new ImageIcon(image));
-        }catch (IOException ex)
+            try
+            {
+                this.file = file;
+                image = ImageIO.read(file);
+                ImageIcon imageIcon = new ImageIcon(image);
+                picLabel.setIcon(imageIcon);
+                picLabel.setPreferredSize(new Dimension(400, 300));
+
+            }catch (IOException ex)
+            {
+                System.out.println("Impossible d'ouvrir l'image par defaut");
+            }
+        }
+        else
         {
-            System.out.println("Impossible d'ouvrir l'image par defaut");
+            System.out.println("Ce n'est pas une image");
         }
     }
-    public JLabel getImage()
-    {
-        return this.picLabel;
-    }
+    public ImageIcon getIcon(){return this.imageIcon;};
     public File getFile() { return this.file; }
 }

@@ -5,9 +5,9 @@ import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import javax.swing.JPanel;
+import javax.swing.JLabel;
 
-public class ImageCourante extends JPanel
+public class ImageCourante extends JLabel
 {
     Image img;
     File file;

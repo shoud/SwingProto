@@ -40,6 +40,8 @@ public class CounterModel extends Observable
                 imageCourante = chemin;
 
             }
+            else
+                file = null;
         }
         else
         {
