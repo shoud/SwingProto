@@ -1,6 +1,7 @@
 package view;
 
 import controller.CounterController;
+import model.CounterModel;
 
 import javax.swing.*;
 import javax.swing.event.TreeModelEvent;
@@ -16,7 +17,8 @@ import java.util.Vector;
 public class ArbreChemin extends JPanel{
     private final JTree tree;
 
-    public ArbreChemin() {
+    public ArbreChemin(final CounterModel m_model)
+    {
         super();
         FileSystemModel fileSystemModel = new FileSystemModel(new File(System.getProperty("user.home")));
         tree = new JTree(fileSystemModel);
@@ -24,7 +26,7 @@ public class ArbreChemin extends JPanel{
         tree.addTreeSelectionListener(new TreeSelectionListener() {
             public void valueChanged(TreeSelectionEvent event) {
                 File file = (File) tree.getLastSelectedPathComponent();
-                System.out.println(file);
+                m_model.FileChanged(file);
             }
         });
         JScrollPane scroll = new JScrollPane(tree);

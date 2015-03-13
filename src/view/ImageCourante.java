@@ -11,11 +11,15 @@ public class ImageCourante extends JPanel
 {
     Image img;
     File file;
+    Graphics g;
 
+    public ImageCourante(File file)
+    {
+        this.file = file;
+    }
     public void paintComponent(Graphics g){
+        this.g = g;
         try {
-            //Le chemin de l'image
-            file = new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.jpg");
             img = ImageIO.read(file);
             //Permet d'afficher l'image dans tout le JPanel
             g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
@@ -23,5 +27,8 @@ public class ImageCourante extends JPanel
             e.printStackTrace();
         }
     }
-
+    public void setFile(File file)
+    {
+        this.file = file;
+    }
 }

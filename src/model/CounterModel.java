@@ -13,39 +13,43 @@ public class CounterModel extends Observable
     //Le chemin de l'image courante
     private File file;
     private String emplacement;
+    private String imageCourante;
     /**
      * Constructeur de la classe CounterModel
      */
     public CounterModel()
     {
-
-        valeur = 1;
-
+        this.file = null;
     }
-    public void incValue()
+    public void FileChanged(File file)
     {
-        this.valeur++;
+        this.file = file;
+        String extension = null;
+        String chemin = file.toString();
+        int pos = chemin.lastIndexOf('.');
+        if (pos > 0 && pos < chemin.length() - 1) {
+            extension = chemin.substring(pos + 1).toLowerCase();
+        }
+        if (extension != null){
+            if (extension.equals("jpeg")
+                    || extension.equals("jpg")
+                    || extension.equals("gif")
+                    || extension.equals("png"))
+            {
+                //On change l'image courante
+                imageCourante = chemin;
+
+            }
+        }
+        else
+        {
+            //On est dans un dossier
+            file = null;
+        }
         setChanged();
         notifyObservers();
     }
-    public int getValeur()
-    {
-        return this.valeur;
-    }
-    /**
-     * Permet de mettre à jour l'emplacement des images.
-     */
-    public void nouveauChemin()
-    {
-
-    }
-    public void ChangerImageCourante(File file)
-    {
-        this.file = file;
-        System.out.println("COUCOU");
-        System.out.println(file);
-    }
-    public File setImageCourante()
+    public File getFile()
     {
         return this.file;
     }

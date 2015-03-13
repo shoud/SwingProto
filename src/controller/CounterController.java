@@ -23,29 +23,18 @@ public class CounterController implements ActionListener
 
     /**
      * Constructeur de la classe CounterController
-     * @param m Le CounterModel de l'application
-     * @param v Le GuiView de l'application
+     * @param m_model Le CounterModel de l'application
+     * @param m_view Le GuiView de l'application
      */
-    public CounterController(CounterModel m, GuiView v)
+    public CounterController(CounterModel m_model, GuiView m_view)
     {
-        m_model = m;
-        m_view = v;
-        //v.addListenersToView(this);
+        this.m_model = m_model;
+        this.m_view = m_view;
+        this.m_view.addListenersToView(this);
     }
     public void actionPerformed(ActionEvent e)
     {
-        /*if(e.getSource() == m_view.getIncBtn())
-            m_model.incValue();
-        if(e.getSource() == m_view.getTree())
-            m_model.nouveauChemin();
-        if(e.getSource() == m_view.getPImage01())
-            m_model.ChangerImageCourante(m_view.getPImage01().getFile());
-        if(e.getSource() == m_view.getPImage02())
-            m_model.ChangerImageCourante(m_view.getPImage02().getFile());
-        if(e.getSource() == m_view.getPImage03())
-            m_model.ChangerImageCourante(m_view.getPImage03().getFile());
-        if(e.getSource() == m_view.getPImage04())
-            m_model.ChangerImageCourante(m_view.getPImage04().getFile());*/
+
 
     }
 }
