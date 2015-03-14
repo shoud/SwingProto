@@ -16,6 +16,8 @@ public class PImage extends JPanel
     private JLabel picLabel;
     private File file;
     private ImageIcon imageIcon;
+    private int Width;
+    private int Height;
 
     public PImage()
     {
@@ -36,12 +38,16 @@ public class PImage extends JPanel
         {
             this.file = file;
             image = ImageIO.read(file);
-            //ImageIcon imageIcon = new ImageIcon("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.jpg");
-            //this.setIcon(imageIcon);
-            ImageIcon imageIcon = new ImageIcon(image);
+            Redimensionner();
+            ImageIcon imageIcon = new ImageIcon(new ImageIcon(image).getImage().getScaledInstance(this.Width, this.Height, Image.SCALE_DEFAULT));
             picLabel = new JLabel(imageIcon);
             picLabel.setPreferredSize(new Dimension(400, 300));
             this.add(picLabel);
+
+
+
+
+
         }catch (IOException ex)
         {
             System.out.println("Impossible d'ouvrir l'image par defaut");
@@ -55,9 +61,10 @@ public class PImage extends JPanel
             {
                 this.file = file;
                 image = ImageIO.read(file);
-                ImageIcon imageIcon = new ImageIcon(image);
+                Redimensionner();
+                ImageIcon imageIcon = new ImageIcon(new ImageIcon(image).getImage().getScaledInstance(this.Width, this.Height, Image.SCALE_DEFAULT));
                 picLabel.setIcon(imageIcon);
-                picLabel.setPreferredSize(new Dimension(400, 300));
+                //picLabel.setPreferredSize(new Dimension(400, 300));
 
             }catch (IOException ex)
             {
@@ -68,6 +75,16 @@ public class PImage extends JPanel
         {
             System.out.println("Ce n'est pas une image");
         }
+    }
+    private void Redimensionner()
+    {
+        this.Width = 400;
+        this.Height = 300;
+        if(image.getWidth() < 400)
+            this.Width = image.getWidth();
+        if(image.getHeight() < 300)
+            this.Height = image.getHeight();
+
     }
     public ImageIcon getIcon(){return this.imageIcon;};
     public File getFile() { return this.file; }
