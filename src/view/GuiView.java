@@ -19,18 +19,18 @@ public class GuiView implements Observer {
     private CounterModel m_model;
     //Composants
     private ArbreChemin arbrePanel;
-    private JButton btPrecedent;
+    private JButton btPrecedent = new JButton("<-");
     private JTextField titreImage;
     private PImage imageCourante;
-    private PImage miniature01;
-    private PImage miniature02;
-    private PImage miniature03;
-    private PImage miniature04;
+    private PImage miniature01 = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif"));
+    private PImage miniature02 = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif"));
+    private PImage miniature03 = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif"));
+    private PImage miniature04 = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif"));
     private JPanel imageCourantePanel;
     private JPanel principalePanel;
     private JPanel menu;
     private JPanel miniaturePanel;
-    private JButton btSuivant;
+    private JButton btSuivant = new JButton("->");
     private JTextField m_textRecherche;
     private JLabel gestionImage;
     private JComboBox m_choixLangue;
@@ -108,28 +108,18 @@ public class GuiView implements Observer {
         tagImage.setPreferredSize(new Dimension(679, 249));
         tagImage.setBorder(BorderFactory.createTitledBorder("Tag de l'image"));
 
-        //Le bouton précèdent
-        btPrecedent = new JButton("<-");
-
         //La première miniature
-        miniature01 = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif"));
         miniature01.setPreferredSize(new Dimension(200, 350));
 
 
         //La deuxième image
-        miniature02 = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif"));
         miniature02.setPreferredSize(new Dimension(200, 350));
 
         //La troisième image
-        miniature03 = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif"));
         miniature03.setPreferredSize(new Dimension(200, 350));
 
         //La quatrième image
-        miniature04 = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif"));
         miniature04.setPreferredSize(new Dimension(200, 350));
-
-        //Le bouton suivant
-        btSuivant = new JButton("->");
 
         //L'objet servant à positionner les composants
         GridBagConstraints gbc = new GridBagConstraints();
@@ -227,8 +217,13 @@ public class GuiView implements Observer {
         //Rend visible la fenêtre
         frame.setVisible(true);
     }
-    public JButton getIncBtn () { return btPrecedent ; }
     public JButton getBtModifier() { return btModifier; }
+    public JButton getBtPrecedent() { return btPrecedent; }
+    public JButton getBtSuivant() { return btSuivant; }
+    public PImage getMiniature01() {return miniature01; }
+    public PImage getMiniature02() {return miniature02; }
+    public PImage getMiniature03() {return miniature03; }
+    public PImage getMiniature04() {return miniature04; }
     @Override
     public void update(Observable o, Object arg)
     {
@@ -237,6 +232,10 @@ public class GuiView implements Observer {
                 //titreImage.setText("" + m_model.getValue());
                 imageCourante.setImage(m_model.getFile());
                 titreImage.setText(m_model.getNomImage());
+                miniature01.setImage(m_model.getMiniature01());
+                miniature02.setImage(m_model.getMiniature02());
+                miniature03.setImage(m_model.getMiniature03());
+                miniature04.setImage(m_model.getMiniature04());
 
             }
         });
@@ -248,6 +247,12 @@ public class GuiView implements Observer {
     public void addListenersToView( CounterController cont )
     {
         btModifier.addActionListener(cont);
+        btPrecedent.addActionListener(cont);
+        btSuivant.addActionListener(cont);
+        miniature01.addActionListener(cont);
+        miniature02.addActionListener(cont);
+        miniature03.addActionListener(cont);
+        miniature04.addActionListener(cont);
     }
     public String getNomImage()
     {

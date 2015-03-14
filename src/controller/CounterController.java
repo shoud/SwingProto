@@ -36,5 +36,17 @@ public class CounterController implements ActionListener
     {
         if (e.getSource() == m_view.getBtModifier())
             m_model.modifier(m_view.getNomImage());
+        if (e.getSource() == m_view.getBtPrecedent())
+            m_model.precedent();
+        if (e.getSource() == m_view.getBtSuivant())
+            m_model.suivant();
+        if (e.getSource() == m_view.getMiniature01())
+            m_model.setImageCourante(0);
+        if (e.getSource() == m_view.getMiniature02())
+            m_model.setImageCourante(1);
+        if (e.getSource() == m_view.getMiniature03())
+            m_model.setImageCourante(2);
+        if (e.getSource() == m_view.getMiniature04())
+            m_model.setImageCourante(3);
     }
 }

@@ -9,7 +9,9 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-public class PImage extends JPanel
+
+//JPanel
+public class PImage extends JButton
 {
 
     private BufferedImage image;
@@ -70,10 +72,6 @@ public class PImage extends JPanel
             {
                 System.out.println("Impossible d'ouvrir l'image par defaut");
             }
-        }
-        else
-        {
-            System.out.println("Ce n'est pas une image");
         }
     }
     private void Redimensionner()
