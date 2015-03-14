@@ -22,7 +22,20 @@ public class GuiView implements Observer {
     private JButton btPrecedent;
     private JTextField titreImage;
     private PImage imageCourante;
+    private PImage miniature01;
+    private PImage miniature02;
+    private PImage miniature03;
+    private PImage miniature04;
     private JPanel imageCourantePanel;
+    private JPanel principalePanel;
+    private JPanel menu;
+    private JPanel miniaturePanel;
+    private JButton btSuivant;
+    private JTextField m_textRecherche;
+    private JLabel gestionImage;
+    private JComboBox m_choixLangue;
+    private JButton btAide;
+    private JTextField tagImage;
 
     /**
      * Conttructeur de GuiView
@@ -30,7 +43,8 @@ public class GuiView implements Observer {
      *
      * @param m_model Le CounterModel
      */
-    public GuiView(CounterModel m_model) {
+    public GuiView(CounterModel m_model)
+    {
         this.m_model = m_model;
         this.m_model. addObserver(this);
         SwingUtilities . invokeLater(new Runnable() {
@@ -47,186 +61,165 @@ public class GuiView implements Observer {
     {
         JFrame frame = new JFrame();
 
+        //Panel Principale
+        principalePanel = new JPanel();
+        principalePanel.setPreferredSize(new Dimension(1280, 705));
+        principalePanel.setLayout(new GridBagLayout());
+        principalePanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+
+        miniaturePanel = new JPanel();
+        miniaturePanel.setPreferredSize(new Dimension(1079, 350));
+        miniaturePanel.setLayout(new FlowLayout());
+        miniaturePanel.setBorder(BorderFactory.createTitledBorder("Images suivantes"));
+
+        menu = new JPanel();
+        menu.setPreferredSize(new Dimension(1279, 50));
+        FlowLayout flowLayoutMenu = new FlowLayout();
+        menu.setLayout(flowLayoutMenu);
+        menu.setBorder(BorderFactory.createTitledBorder("Options"));
+
         //Titre de l'application
-        JPanel titreApplication = new JPanel();
-        titreApplication.setBackground(Color.YELLOW);
-        titreApplication.setPreferredSize(new Dimension(200, 50));
-        titreApplication.add(new JLabel("Gestion d'images"));
+        gestionImage = new JLabel("Gestion d'images");
 
         //Permet de rechercher une image
-        JPanel recherchePanel = new JPanel();
-        recherchePanel.setBackground(Color.red);
-        recherchePanel.setPreferredSize(new Dimension(200, 50));
-        JTextField m_textRecherche = new JTextField("Recherche");
-        recherchePanel.add(m_textRecherche);
+         m_textRecherche = new JTextField("Recherche");
 
         //Permet de changer la langue du programme
-        JPanel langagePanel = new JPanel();
-        langagePanel.setBackground(Color.green);
-        langagePanel.setPreferredSize(new Dimension(200, 50));
         String[] items = {"Français", "English", "中国"};
-        JComboBox m_choixLangue = new JComboBox(items);
-        langagePanel.add(m_choixLangue);
+        m_choixLangue = new JComboBox(items);
 
         //Bouton permettant d'afficher l'aide
-        JPanel aidePanel = new JPanel();
-        aidePanel.setBackground(Color.black);
-        aidePanel.setPreferredSize(new Dimension(680, 50));
-        JButton btAide = new JButton("Aide");
-        aidePanel.add(btAide);
+        btAide = new JButton("Aide");
 
         //L'arbre des fichiers
         arbrePanel = new ArbreChemin(m_model);
-        arbrePanel.setBackground(Color.cyan);
         arbrePanel.setPreferredSize(new Dimension(200, 670));
+        arbrePanel.setBorder(BorderFactory.createTitledBorder("Dossier"));
 
         //Image courante
-        /*imageCourantePanel = new JPanel();
-        imageCourantePanel.setPreferredSize(new Dimension(400, 300));*/
         imageCourante = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.jpg"));
-        imageCourante.setBackground(Color.BLUE);
         imageCourante.setPreferredSize(new Dimension(400, 300));
-        //imageCourantePanel.add(imageCourante);
-        /*ImageIcon imageIcon = new ImageIcon("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.jpg");
-        JLabel label = new JLabel(imageIcon);
-        imageCourantePanel.add(label);*/
+        imageCourante.setBorder(BorderFactory.createTitledBorder("Visualisation de l'image courante"));
 
         //Titre de l'image courante
-        JPanel titreImagePanel = new JPanel();
-        titreImagePanel.setBackground(Color.PINK);
-        titreImagePanel.setPreferredSize(new Dimension(680, 50));
         titreImage = new JTextField("Titre de l'image");
         titreImage.setPreferredSize(new Dimension(679, 49));
-        titreImagePanel.add(titreImage);
+        titreImage.setBorder(BorderFactory.createTitledBorder("Nom de l'image"));
 
         //Les tags de l'image courante
-        JPanel tagImageCourantePanel = new JPanel();
-        tagImageCourantePanel.setBackground(Color.darkGray);
-        tagImageCourantePanel.setPreferredSize(new Dimension(680, 250));
-        JTextField tagImage = new JTextField("Tag de l'image");
+        tagImage = new JTextField("Tag de l'image");
         tagImage.setPreferredSize(new Dimension(679, 249));
-        tagImageCourantePanel.add(tagImage);
+        tagImage.setBorder(BorderFactory.createTitledBorder("Tag de l'image"));
 
         //Le bouton précèdent
-        JPanel boutonprecedentPanel = new JPanel();
-        boutonprecedentPanel.setPreferredSize(new Dimension(50, 50));
         btPrecedent = new JButton("<-");
-        boutonprecedentPanel.add(btPrecedent);
 
         //La première miniature
-        Miniature miniature01 = new Miniature();
-        miniature01.setPreferredSize(new Dimension(250, 125));
+        miniature01 = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif"));
+        miniature01.setPreferredSize(new Dimension(200, 350));
+
 
         //La deuxième image
-        Miniature miniature02 = new Miniature();
-        miniature02.setPreferredSize(new Dimension(250, 125));
+        miniature02 = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif"));
+        miniature02.setPreferredSize(new Dimension(200, 350));
 
         //La troisième image
-        Miniature miniature03 = new Miniature();
-        miniature03.setPreferredSize(new Dimension(250, 125));
+        miniature03 = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif"));
+        miniature03.setPreferredSize(new Dimension(200, 350));
 
         //La quatrième image
-        Miniature miniature04 = new Miniature();
-        miniature04.setPreferredSize(new Dimension(250, 125));
-
-        //La cinquième image
-        Miniature miniature05 = new Miniature();
-        miniature05.setPreferredSize(new Dimension(250, 125));
+        miniature04 = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif"));
+        miniature04.setPreferredSize(new Dimension(200, 350));
 
         //Le bouton suivant
-        JPanel boutonSuivantPanel = new JPanel();
-        boutonSuivantPanel.setPreferredSize(new Dimension(50, 50));
-        JButton btSuivant = new JButton("->");
-        boutonSuivantPanel.add(btSuivant);
-
-        //Le conteneur principal
-        JPanel content = new JPanel();
-        content.setPreferredSize(new Dimension(1280, 720));
-        content.setBackground(Color.WHITE);
-        //On définit le layout manager
-        content.setLayout(new GridBagLayout());
+        btSuivant = new JButton("->");
 
         //L'objet servant à positionner les composants
         GridBagConstraints gbc = new GridBagConstraints();
 
+        menu.add(gestionImage);
+        menu.add(m_textRecherche);
+        menu.add(m_choixLangue);
+        menu.add(btAide);
+
         //On positionne la case de départ du composant
+        gbc.anchor = GridBagConstraints.NORTHWEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.anchor = GridBagConstraints.LINE_START;
-        content.add(titreApplication, gbc);
-        //---------------------------------------------
-        //On positionne la case de départ du composant
-        gbc.gridx = 1;
-        content.add(recherchePanel, gbc);
-        //---------------------------------------------
-        //On positionne la case de départ du composant
-        gbc.gridx = 2;
-        content.add(langagePanel, gbc);
-        //---------------------------------------------
-        //Cette instruction informe le layout que c'est une fin de ligne
-        //On positionne la case de départ du composant
-        gbc.gridx = 3;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
         gbc.gridwidth = GridBagConstraints.REMAINDER;
-        content.add(aidePanel, gbc);
+        gbc.gridheight= 1;
+        principalePanel.add(menu, gbc);
         //---------------------------------------------
+        gbc.anchor = GridBagConstraints.NORTHWEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 1;
-        gbc.anchor = GridBagConstraints.LINE_START;
-        gbc.gridheight = 3;
-        //Celle-ci indique que la cellule se réplique de façon verticale
-        gbc.fill = GridBagConstraints.VERTICAL;
-        content.add(arbrePanel, gbc);
+        gbc.weightx = 1.0;
+        gbc.weighty = 3.0;
+        gbc.gridwidth = 1;
+        gbc.gridheight= 3;
+        principalePanel.add(arbrePanel, gbc);
         //---------------------------------------------
         //On positionne la case de départ du composant
+        gbc.anchor = GridBagConstraints.NORTHWEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 1;
-        gbc.gridheight = 2;
-        content.add(imageCourante, gbc); //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+        gbc.gridy = 1;
+        gbc.weightx = 2.0;
+        gbc.weighty = 2.0;
+        gbc.gridwidth = 2;
+        gbc.gridheight= 2;
+        principalePanel.add(imageCourante, gbc);
         //---------------------------------------------
         //On positionne la case de départ du composant
+        gbc.anchor = GridBagConstraints.NORTHWEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 3;
-        gbc.gridheight = 1;
-        //gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridy = 1;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.gridheight= 1;
+        gbc.ipady =0;
         gbc.gridwidth = GridBagConstraints.REMAINDER;
-        content.add(titreImagePanel, gbc);
+        principalePanel.add(titreImage, gbc);
         //---------------------------------------------
         //On positionne la case de départ du composant
+        gbc.anchor = GridBagConstraints.NORTHWEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 3;
         gbc.gridy = 2;
-        //gbc.fill = GridBagConstraints.VERTICAL;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.gridheight= 1;
+        gbc.ipady =0;
         gbc.gridwidth = GridBagConstraints.REMAINDER;
-        content.add(tagImageCourantePanel, gbc);
+        principalePanel.add(tagImage, gbc);
+        //---------------------------------------------
+        miniaturePanel.add(btPrecedent);
+        miniaturePanel.add(miniature01);
+        miniaturePanel.add(miniature02);
+        miniaturePanel.add(miniature03);
+        miniaturePanel.add(miniature04);
+        miniaturePanel.add(btSuivant);
+
         //---------------------------------------------
         //On positionne la case de départ du composant
-        /*gbc.gridx = 1;
+        gbc.anchor = GridBagConstraints.NORTHWEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 1;
         gbc.gridy = 3;
-        gbc.anchor = GridBagConstraints.LINE_START;
-        content.add(boutonprecedentPanel, gbc);
-        //---------------------------------------------
-        gbc.gridx = 2;
-        content.add(miniature01, gbc);
-        //---------------------------------------------
-        gbc.gridx = 3;
-        content.add(miniature02, gbc);
-        //---------------------------------------------
-        gbc.gridx = 4;
-        content.add(miniature03, gbc);
-        //---------------------------------------------
-        gbc.gridx = 5;
-        content.add(miniature04, gbc);
-        //---------------------------------------------
-        gbc.gridx = 6;
-        content.add(miniature05, gbc);
-        //---------------------------------------------
-        gbc.gridx = 7;
         gbc.gridwidth = GridBagConstraints.REMAINDER;
-        content.add(boutonSuivantPanel, gbc);*/
-        //---------------------------------------------
+        principalePanel.add(miniaturePanel, gbc);
 
-        frame.add(content);
+        frame.add(principalePanel);
         frame.pack();
         //On rajoute un titre à la fenêtre
         frame.setTitle("Gestion d'image");
         //Taille de la fenêtre
+        frame.setSize(1281, 721);
         frame.setSize(1280, 720);
         //Afficher la fenêtre au centre de l'écran
         frame.setLocationRelativeTo(null);
