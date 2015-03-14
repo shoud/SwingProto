@@ -11,9 +11,10 @@ public class CounterModel extends Observable
 
     private int valeur;
     //Le chemin de l'image courante
-    private File file;
+    private File file = null;
     private String emplacement;
     private String imageCourante;
+    private String nomImage;
     /**
      * Constructeur de la classe CounterModel
      */
@@ -23,7 +24,6 @@ public class CounterModel extends Observable
     }
     public void FileChanged(File file)
     {
-        this.file = file;
         String extension = null;
         String chemin = file.toString();
         int pos = chemin.lastIndexOf('.');
@@ -38,18 +38,36 @@ public class CounterModel extends Observable
             {
                 //On change l'image courante
                 imageCourante = chemin;
+                nomImage = file.toString();
+                this.file = file;
 
             }
             else
-                file = null;
+                this.file = null;
         }
         else
         {
             //On est dans un dossier
-            file = null;
+            this.file = null;
         }
         setChanged();
         notifyObservers();
+    }
+    public void modifier(String nom)
+    {
+        if(nom != null)
+        {
+            String str = file.getPath().toString();
+            str = str.substring(0, str.length() - this.nomImage.length());
+            this.nomImage = nom;
+            file.renameTo(new File(str + this.nomImage));
+        }
+        setChanged();
+        notifyObservers();
+    }
+    public String getNomImage()
+    {
+        return this.nomImage;
     }
     public File getFile()
     {

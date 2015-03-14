@@ -34,7 +34,7 @@ public class CounterController implements ActionListener
     }
     public void actionPerformed(ActionEvent e)
     {
-
-
+        if (e.getSource() == m_view.getBtModifier())
+            m_model.modifier(m_view.getNomImage());
     }
 }

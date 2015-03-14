@@ -34,7 +34,7 @@ public class GuiView implements Observer {
     private JTextField m_textRecherche;
     private JLabel gestionImage;
     private JComboBox m_choixLangue;
-    private JButton btAide;
+    private JButton btModifier = new JButton("Modifier");;
     private JTextField tagImage;
 
     /**
@@ -88,9 +88,6 @@ public class GuiView implements Observer {
         String[] items = {"Français", "English", "中国"};
         m_choixLangue = new JComboBox(items);
 
-        //Bouton permettant d'afficher l'aide
-        btAide = new JButton("Aide");
-
         //L'arbre des fichiers
         arbrePanel = new ArbreChemin(m_model);
         arbrePanel.setPreferredSize(new Dimension(200, 670));
@@ -140,7 +137,7 @@ public class GuiView implements Observer {
         menu.add(gestionImage);
         menu.add(m_textRecherche);
         menu.add(m_choixLangue);
-        menu.add(btAide);
+        menu.add(btModifier);
 
         //On positionne la case de départ du composant
         gbc.anchor = GridBagConstraints.NORTHWEST;
@@ -231,6 +228,7 @@ public class GuiView implements Observer {
         frame.setVisible(true);
     }
     public JButton getIncBtn () { return btPrecedent ; }
+    public JButton getBtModifier() { return btModifier; }
     @Override
     public void update(Observable o, Object arg)
     {
@@ -238,18 +236,21 @@ public class GuiView implements Observer {
             public void run() {
                 //titreImage.setText("" + m_model.getValue());
                 imageCourante.setImage(m_model.getFile());
+                titreImage.setText(m_model.getNomImage());
 
             }
         });
     }
-
     /**
      * On rajoute les elements de l'ui dans le listener
      * @param cont
      */
-    public void addListenersToView ( CounterController cont )
+    public void addListenersToView( CounterController cont )
     {
-        //btPrecedent.addActionListener(cont);
-
+        btModifier.addActionListener(cont);
+    }
+    public String getNomImage()
+    {
+        return this.titreImage.getText();
     }
 }
