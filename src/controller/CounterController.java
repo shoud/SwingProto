@@ -34,6 +34,10 @@ public class CounterController implements ActionListener
     }
     public void actionPerformed(ActionEvent e)
     {
+        if( e.getSource() == m_view.getM_choixLangue()) {
+            m_model.langue(m_view.getCurrentLocale(), m_view.getMessages(), m_view.getM_choixLangue());
+            m_view.refresh();
+        }
         if (e.getSource() == m_view.getBtModifier())
             m_model.modifier(m_view.getNomImage(), m_view.getTagImage());
         if(e.getSource() == m_view.getBtRechercher())

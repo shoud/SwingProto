@@ -8,8 +8,10 @@ import model.PImage;
 
 import java.awt.*;
 import java.io.File;
+import java.util.Locale;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.ResourceBundle;
 
 /**
  * Classe permetttant de gérer l'affichage graphique
@@ -18,24 +20,31 @@ public class GuiView implements Observer {
     //Le model
     private CounterModel m_model;
     //Composants
+    private Locale currentLocale;
+    private ResourceBundle messages;
     private ArbreChemin arbrePanel;
-    private JButton btPrecedent = new JButton("<-");
+    private JButton btPrecedent = new JButton("←");
     private JTextField titreImage;
     private PImage imageCourante;
-    private PImage miniature01 = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif"));
-    private PImage miniature02 = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif"));
-    private PImage miniature03 = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif"));
-    private PImage miniature04 = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif"));
+    private JFrame frame;
+    //private PImage miniature01 = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif"));
+    //private PImage miniature02 = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif"));
+    //private PImage miniature03 = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif"));
+    //private PImage miniature04 = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif"));
+    private PImage miniature01 = new PImage(new File("D:/GitHub/SwingProto/src/rsc/default.gif"));
+    private PImage miniature02 = new PImage(new File("D:/GitHub/SwingProto/src/rsc/default.gif"));
+    private PImage miniature03 = new PImage(new File("D:/GitHub/SwingProto/src/rsc/default.gif"));
+    private PImage miniature04 = new PImage(new File("D:/GitHub/SwingProto/src/rsc/default.gif"));
     private JPanel imageCourantePanel;
     private JPanel principalePanel;
     private JPanel menu;
     private JPanel miniaturePanel;
-    private JButton btSuivant = new JButton("->");
+    private JButton btSuivant = new JButton("→");
     private JTextField m_textRecherche;
     private JLabel gestionImage;
     private JComboBox m_choixLangue;
-    private JButton btModifier = new JButton("Modifier");
-    private JButton btRechercher = new JButton("Rechercher");;
+    private JButton btModifier;
+    private JButton btRechercher;
     private JTextField tagImage;
 
     /**
@@ -48,6 +57,11 @@ public class GuiView implements Observer {
     {
         this.m_model = m_model;
         this.m_model. addObserver(this);
+        currentLocale = new Locale("fr", "FR");
+        messages = ResourceBundle.getBundle("MessagesBundle", currentLocale);
+        btModifier = new JButton(messages.getString("modify"));
+        btRechercher = new JButton(messages.getString("search"));
+
         SwingUtilities . invokeLater(new Runnable() {
             public void run() {
                 createAndShowGUI();
@@ -55,12 +69,21 @@ public class GuiView implements Observer {
         });
     }
 
+    public void refresh()
+    {
+
+        SwingUtilities.updateComponentTreeUI(frame);
+        frame.invalidate();
+        frame.validate();
+        frame.repaint();
+    }
+
     /**
      * Permet de créer la fenêtre en placant tout ses composants.
      */
     public void createAndShowGUI()
     {
-        JFrame frame = new JFrame();
+        frame = new JFrame();
 
         //Panel Principale
         principalePanel = new JPanel();
@@ -71,43 +94,43 @@ public class GuiView implements Observer {
         miniaturePanel = new JPanel();
         miniaturePanel.setPreferredSize(new Dimension(1079, 350));
         miniaturePanel.setLayout(new FlowLayout());
-        miniaturePanel.setBorder(BorderFactory.createTitledBorder("Images suivantes"));
+        miniaturePanel.setBorder(BorderFactory.createTitledBorder(messages.getString("next")));
 
         menu = new JPanel();
         menu.setPreferredSize(new Dimension(1279, 50));
         FlowLayout flowLayoutMenu = new FlowLayout();
         menu.setLayout(flowLayoutMenu);
-        menu.setBorder(BorderFactory.createTitledBorder("Options"));
+        menu.setBorder(BorderFactory.createTitledBorder(messages.getString("options")));
 
         //Titre de l'application
-        gestionImage = new JLabel("Gestion d'images");
+        gestionImage = new JLabel(messages.getString("gestionI"));
 
         //Permet de rechercher une image
-         m_textRecherche = new JTextField("Recherche");
+         m_textRecherche = new JTextField(messages.getString("search"));
 
         //Permet de changer la langue du programme
-        String[] items = {"Français", "English", "中国"};
+        String[] items = {messages.getString("french"), messages.getString("english"), messages.getString("chinese")};
         m_choixLangue = new JComboBox(items);
 
         //L'arbre des fichiers
         arbrePanel = new ArbreChemin(m_model);
         arbrePanel.setPreferredSize(new Dimension(200, 670)); //200, 670
-        arbrePanel.setBorder(BorderFactory.createTitledBorder("Dossier"));
+        arbrePanel.setBorder(BorderFactory.createTitledBorder(messages.getString("dir")));
 
         //Image courante
-        imageCourante = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.jpg"));
+        imageCourante = new PImage(new File("D:/GitHub/SwingProto/src/rsc/default.gif"));
         imageCourante.setPreferredSize(new Dimension(400, 300));
-        imageCourante.setBorder(BorderFactory.createTitledBorder("Visualisation de l'image courante"));
+        imageCourante.setBorder(BorderFactory.createTitledBorder(messages.getString("visualisation")));
 
         //Titre de l'image courante
-        titreImage = new JTextField("Titre de l'image");
+        titreImage = new JTextField(messages.getString("titleI"));
         titreImage.setPreferredSize(new Dimension(679, 49));
-        titreImage.setBorder(BorderFactory.createTitledBorder("Nom de l'image"));
+        titreImage.setBorder(BorderFactory.createTitledBorder(messages.getString("nameI")));
 
         //Les tags de l'image courante
-        tagImage = new JTextField("Tag de l'image");
+        tagImage = new JTextField(messages.getString("tag"));
         tagImage.setPreferredSize(new Dimension(679, 249));
-        tagImage.setBorder(BorderFactory.createTitledBorder("Tag de l'image"));
+        tagImage.setBorder(BorderFactory.createTitledBorder(messages.getString("tag")));
 
         //La première miniature
         miniature01.setPreferredSize(new Dimension(200, 350));
@@ -206,7 +229,7 @@ public class GuiView implements Observer {
         frame.add(principalePanel);
         frame.pack();
         //On rajoute un titre à la fenêtre
-        frame.setTitle("Gestion d'image");
+        frame.setTitle(messages.getString("gestionI"));
         //Taille de la fenêtre
         frame.setSize(1281, 721);
         frame.setSize(1280, 720);
@@ -227,6 +250,9 @@ public class GuiView implements Observer {
     public PImage getMiniature02() {return miniature02; }
     public PImage getMiniature03() {return miniature03; }
     public PImage getMiniature04() {return miniature04; }
+    public JComboBox getM_choixLangue() { return m_choixLangue; }
+    public Locale getCurrentLocale() { return currentLocale; }
+    public ResourceBundle getMessages(){ return messages; }
     @Override
     public void update(Observable o, Object arg)
     {
@@ -250,6 +276,7 @@ public class GuiView implements Observer {
      */
     public void addListenersToView( CounterController cont )
     {
+
         btModifier.addActionListener(cont);
         btRechercher.addActionListener(cont);
         btPrecedent.addActionListener(cont);
@@ -258,6 +285,7 @@ public class GuiView implements Observer {
         miniature02.addActionListener(cont);
         miniature03.addActionListener(cont);
         miniature04.addActionListener(cont);
+        m_choixLangue.addActionListener(cont);
     }
     public String getNomImage()
     {

@@ -26,7 +26,7 @@ public class PImage extends JButton
         try
         {
             ///home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif
-            file = new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif");
+            file = new File("D:/GitHub/SwingProto/src/rsc/default.gif");
             image = ImageIO.read(file);
             //this.setIcon((Icon) image);
         }catch (IOException ex)

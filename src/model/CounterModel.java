@@ -1,9 +1,8 @@
 package model;
 
+import javax.swing.*;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Observable;
+import java.util.*;
 
 /**
  * Classe permettant de gérer le model
@@ -119,6 +118,25 @@ public class CounterModel extends Observable
             listeMiniaturesAffichable.clear();
         }
         listePrecedente.clear();
+        setChanged();
+        notifyObservers();
+    }
+    public void langue(Locale currentLocale, ResourceBundle messages, JComboBox m_choixLangue)
+    {
+        String selected = (String) m_choixLangue.getSelectedItem();
+        if(selected == "Français" || selected == "French" || selected == "法国" ){
+            currentLocale = new Locale("fr", "FR");
+            messages = ResourceBundle.getBundle("MessagesBundle", currentLocale);
+        }
+        if (selected == "English" || selected == "Anglais" || selected == "英语"){
+            currentLocale = new Locale("en", "EN");
+            messages = ResourceBundle.getBundle("MessagesBundle", currentLocale);
+        }
+        if (selected == "Chinese" || selected == "Chinois" || selected == "中国"){
+            currentLocale = new Locale("ch", "CH");
+            messages = ResourceBundle.getBundle("MessagesBundle", currentLocale);
+        }
+
         setChanged();
         notifyObservers();
     }
