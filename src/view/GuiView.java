@@ -77,7 +77,7 @@ public class GuiView implements Observer {
         miniaturePanel.setBorder(BorderFactory.createTitledBorder("Images suivantes"));
 
         menu = new JPanel();
-        menu.setPreferredSize(new Dimension(1279, 75));
+        menu.setPreferredSize(new Dimension(1279, 100));
         FlowLayout flowLayoutMenu = new FlowLayout();
         menu.setLayout(flowLayoutMenu);
         menu.setBorder(BorderFactory.createTitledBorder("Options"));
@@ -114,17 +114,17 @@ public class GuiView implements Observer {
         tagImage.setBorder(BorderFactory.createTitledBorder("Tag de l'image"));
 
         //La première miniature
-        miniature01.setPreferredSize(new Dimension(100, 100));//new Dimension(200, 350));
+        miniature01.setPreferredSize(new Dimension(200, 200));//new Dimension(200, 350));
 
 
         //La deuxième image
-        miniature02.setPreferredSize(new Dimension(100, 100));//new Dimension(200, 350));
+        miniature02.setPreferredSize(new Dimension(200, 200));//new Dimension(200, 350));
 
         //La troisième image
-        miniature03.setPreferredSize(new Dimension(100, 100));//new Dimension(200, 350));
+        miniature03.setPreferredSize(new Dimension(200, 200));//new Dimension(200, 350));
 
         //La quatrième image
-        miniature04.setPreferredSize(new Dimension(100, 100));//new Dimension(200, 350));
+        miniature04.setPreferredSize(new Dimension(200, 200));//new Dimension(200, 350));
 
         //L'objet servant à positionner les composants
         GridBagConstraints gbc = new GridBagConstraints();
@@ -140,17 +140,17 @@ public class GuiView implements Observer {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.weightx = 1.0; // % de la place libre que prendra l'objet
-        gbc.weighty = 1.0;// % de la place libre que prendra l'objet
+        gbc.weightx = 0; // % de la place libre que prendra l'objet
+        gbc.weighty = 0;// % de la place libre que prendra l'objet
         gbc.gridwidth = GridBagConstraints.REMAINDER; // nombre de case que prendra l'objet
-        gbc.gridheight= 1;// nombre de case que prendra l'objet
+        gbc.gridheight= 2;// nombre de case que prendra l'objet
         principalePanel.add(menu, gbc);
         //---------------------------------------------
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.weightx = 1.0;
+        gbc.gridy = 2;
+        gbc.weightx = 0.3;
         gbc.weighty = 1.0;
         gbc.gridwidth = 3;
         gbc.gridheight= 6;
@@ -160,35 +160,35 @@ public class GuiView implements Observer {
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 3;
-        gbc.gridy = 1;
-        gbc.weightx = 1.0;
+        gbc.gridy = 2;
+        gbc.weightx = 0.4;
         gbc.weighty = 1.0;
         gbc.gridwidth = 6;
         gbc.gridheight= 6;
         principalePanel.add(imageCourante, gbc);
         //---------------------------------------------
         //On positionne la case de départ du composant
-        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 9;
-        gbc.gridy = 1;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
+        gbc.gridy = 2;
+        gbc.weightx = 0.3;
+        gbc.weighty = 0.5;
         gbc.gridheight= 2;
         gbc.ipady =0;
-        gbc.gridwidth =3; // GridBagConstraints.REMAINDER;
+        gbc.gridwidth = 3;
         principalePanel.add(titreImage, gbc);
         //---------------------------------------------
         //On positionne la case de départ du composant
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 9;
-        gbc.gridy = 4;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
+        gbc.gridy = 5;
+        gbc.weightx = 0.3;
+        gbc.weighty = 0.5;
         gbc.gridheight= 2;
         gbc.ipady =0;
-        gbc.gridwidth =3; //GridBagConstraints.REMAINDER;
+        gbc.gridwidth = 3;
         principalePanel.add(tagImage, gbc);
         //---------------------------------------------
         miniaturePanel.add(btPrecedent);
@@ -203,11 +203,11 @@ public class GuiView implements Observer {
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
-        gbc.gridy = 7;
-        gbc.weightx = 0;
-        gbc.weighty = 0;
+        gbc.gridy = 8;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
         gbc.gridheight= 2;
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.gridwidth = 12;
         principalePanel.add(miniaturePanel, gbc);
 
         frame.add(principalePanel);
