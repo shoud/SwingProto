@@ -19,7 +19,7 @@ public class GuiView implements Observer {
     private CounterModel m_model;
     //Composants
     private ArbreChemin arbrePanel;
-    private JButton btPrecedent = new JButton("<-");
+    private JButton btPrecedent = new JButton("\u2190");
     private JTextField titreImage;
     private PImage imageCourante;
     //private PImage miniature02 = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif"));
@@ -34,7 +34,7 @@ public class GuiView implements Observer {
     private JPanel principalePanel;
     private JPanel menu;
     private JPanel miniaturePanel;
-    private JButton btSuivant = new JButton("->");
+    private JButton btSuivant = new JButton("\u2192");
     private JTextField m_textRecherche;
     private JLabel gestionImage;
     private JComboBox m_choixLangue;
@@ -72,7 +72,7 @@ public class GuiView implements Observer {
         principalePanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 
         miniaturePanel = new JPanel();
-        miniaturePanel.setPreferredSize(new Dimension(1079, 200));
+        miniaturePanel.setPreferredSize(new Dimension(1079, 201));
         miniaturePanel.setLayout(new FlowLayout());
         miniaturePanel.setBorder(BorderFactory.createTitledBorder("Images suivantes"));
 
@@ -128,7 +128,7 @@ public class GuiView implements Observer {
 
         //L'objet servant à positionner les composants
         GridBagConstraints gbc = new GridBagConstraints();
-        //x 12 cases | y 9 cases
+        //x 12 cases | y 12 cases
 
         menu.add(gestionImage);
         menu.add(m_textRecherche);
@@ -153,7 +153,7 @@ public class GuiView implements Observer {
         gbc.weightx = 0.3;
         gbc.weighty = 1.0;
         gbc.gridwidth = 3;
-        gbc.gridheight= 6;
+        gbc.gridheight= 7;
         principalePanel.add(arbrePanel, gbc);
         //---------------------------------------------
         //On positionne la case de départ du composant
@@ -164,7 +164,7 @@ public class GuiView implements Observer {
         gbc.weightx = 0.4;
         gbc.weighty = 1.0;
         gbc.gridwidth = 6;
-        gbc.gridheight= 6;
+        gbc.gridheight= 7;
         principalePanel.add(imageCourante, gbc);
         //---------------------------------------------
         //On positionne la case de départ du composant
@@ -174,9 +174,9 @@ public class GuiView implements Observer {
         gbc.gridy = 2;
         gbc.weightx = 0.3;
         gbc.weighty = 0.5;
-        gbc.gridheight= 2;
-        gbc.ipady =0;
         gbc.gridwidth = 3;
+        gbc.gridheight= 3;
+        gbc.ipady =0;
         principalePanel.add(titreImage, gbc);
         //---------------------------------------------
         //On positionne la case de départ du composant
@@ -186,9 +186,9 @@ public class GuiView implements Observer {
         gbc.gridy = 5;
         gbc.weightx = 0.3;
         gbc.weighty = 0.5;
-        gbc.gridheight= 2;
-        gbc.ipady =0;
         gbc.gridwidth = 3;
+        gbc.gridheight= 3;
+        gbc.ipady =0;
         principalePanel.add(tagImage, gbc);
         //---------------------------------------------
         miniaturePanel.add(btPrecedent);
@@ -203,10 +203,10 @@ public class GuiView implements Observer {
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
-        gbc.gridy = 8;
+        gbc.gridy = 9;
         gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.gridheight= 2;
+        gbc.weighty = 0.16;
+        gbc.gridheight= 3;
         gbc.gridwidth = 12;
         principalePanel.add(miniaturePanel, gbc);
 
