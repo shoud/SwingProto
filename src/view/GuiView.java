@@ -22,10 +22,14 @@ public class GuiView implements Observer {
     private JButton btPrecedent = new JButton("<-");
     private JTextField titreImage;
     private PImage imageCourante;
-    private PImage miniature01 = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif"));
-    private PImage miniature02 = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif"));
-    private PImage miniature03 = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif"));
-    private PImage miniature04 = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif"));
+    //private PImage miniature02 = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif"));
+    //private PImage miniature02 = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif"));
+    //private PImage miniature02 = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif"));
+    //private PImage miniature02 = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif"));
+    private PImage miniature01 = new PImage(new File("D:/GitHub/SwingProto/src/rsc/default.gif"));
+    private PImage miniature02 = new PImage(new File("D:/GitHub/SwingProto/src/rsc/default.gif"));
+    private PImage miniature03 = new PImage(new File("D:/GitHub/SwingProto/src/rsc/default.gif"));
+    private PImage miniature04 = new PImage(new File("D:/GitHub/SwingProto/src/rsc/default.gif"));
     private JPanel imageCourantePanel;
     private JPanel principalePanel;
     private JPanel menu;
@@ -68,12 +72,12 @@ public class GuiView implements Observer {
         principalePanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 
         miniaturePanel = new JPanel();
-        miniaturePanel.setPreferredSize(new Dimension(1079, 350));
+        miniaturePanel.setPreferredSize(new Dimension(1079, 200));
         miniaturePanel.setLayout(new FlowLayout());
         miniaturePanel.setBorder(BorderFactory.createTitledBorder("Images suivantes"));
 
         menu = new JPanel();
-        menu.setPreferredSize(new Dimension(1279, 50));
+        menu.setPreferredSize(new Dimension(1279, 75));
         FlowLayout flowLayoutMenu = new FlowLayout();
         menu.setLayout(flowLayoutMenu);
         menu.setBorder(BorderFactory.createTitledBorder("Options"));
@@ -90,39 +94,41 @@ public class GuiView implements Observer {
 
         //L'arbre des fichiers
         arbrePanel = new ArbreChemin(m_model);
-        arbrePanel.setPreferredSize(new Dimension(200, 670));
+        arbrePanel.setPreferredSize(new Dimension(100, 100)); // 200, 670
         arbrePanel.setBorder(BorderFactory.createTitledBorder("Dossier"));
 
         //Image courante
-        imageCourante = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.jpg"));
-        imageCourante.setPreferredSize(new Dimension(400, 300));
+        //imageCourante = new PImage(new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif"));
+        imageCourante = new PImage(new File("D:/GitHub/SwingProto/src/rsc/default.gif"));
+        imageCourante.setPreferredSize(new Dimension(100, 100)); //new Dimension(400, 300));
         imageCourante.setBorder(BorderFactory.createTitledBorder("Visualisation de l'image courante"));
 
         //Titre de l'image courante
         titreImage = new JTextField("Titre de l'image");
-        titreImage.setPreferredSize(new Dimension(679, 49));
+        titreImage.setPreferredSize(new Dimension(200, 100));//(new Dimension(679, 49));
         titreImage.setBorder(BorderFactory.createTitledBorder("Nom de l'image"));
 
         //Les tags de l'image courante
         tagImage = new JTextField("Tag de l'image");
-        tagImage.setPreferredSize(new Dimension(679, 249));
+        tagImage.setPreferredSize(new Dimension(200, 100));///(new Dimension(679, 49));
         tagImage.setBorder(BorderFactory.createTitledBorder("Tag de l'image"));
 
         //La première miniature
-        miniature01.setPreferredSize(new Dimension(200, 350));
+        miniature01.setPreferredSize(new Dimension(100, 100));//new Dimension(200, 350));
 
 
         //La deuxième image
-        miniature02.setPreferredSize(new Dimension(200, 350));
+        miniature02.setPreferredSize(new Dimension(100, 100));//new Dimension(200, 350));
 
         //La troisième image
-        miniature03.setPreferredSize(new Dimension(200, 350));
+        miniature03.setPreferredSize(new Dimension(100, 100));//new Dimension(200, 350));
 
         //La quatrième image
-        miniature04.setPreferredSize(new Dimension(200, 350));
+        miniature04.setPreferredSize(new Dimension(100, 100));//new Dimension(200, 350));
 
         //L'objet servant à positionner les composants
         GridBagConstraints gbc = new GridBagConstraints();
+        //x 12 cases | y 9 cases
 
         menu.add(gestionImage);
         menu.add(m_textRecherche);
@@ -134,10 +140,10 @@ public class GuiView implements Observer {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.gridheight= 1;
+        gbc.weightx = 1.0; // % de la place libre que prendra l'objet
+        gbc.weighty = 1.0;// % de la place libre que prendra l'objet
+        gbc.gridwidth = GridBagConstraints.REMAINDER; // nombre de case que prendra l'objet
+        gbc.gridheight= 1;// nombre de case que prendra l'objet
         principalePanel.add(menu, gbc);
         //---------------------------------------------
         gbc.anchor = GridBagConstraints.NORTHWEST;
@@ -145,44 +151,44 @@ public class GuiView implements Observer {
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.weightx = 1.0;
-        gbc.weighty = 3.0;
-        gbc.gridwidth = 1;
-        gbc.gridheight= 3;
+        gbc.weighty = 1.0;
+        gbc.gridwidth = 3;
+        gbc.gridheight= 6;
         principalePanel.add(arbrePanel, gbc);
         //---------------------------------------------
         //On positionne la case de départ du composant
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridx = 1;
-        gbc.gridy = 1;
-        gbc.weightx = 2.0;
-        gbc.weighty = 2.0;
-        gbc.gridwidth = 2;
-        gbc.gridheight= 2;
-        principalePanel.add(imageCourante, gbc);
-        //---------------------------------------------
-        //On positionne la case de départ du composant
-        gbc.anchor = GridBagConstraints.NORTHWEST;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 3;
         gbc.gridy = 1;
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
-        gbc.gridheight= 1;
+        gbc.gridwidth = 6;
+        gbc.gridheight= 6;
+        principalePanel.add(imageCourante, gbc);
+        //---------------------------------------------
+        //On positionne la case de départ du composant
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 9;
+        gbc.gridy = 1;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.gridheight= 2;
         gbc.ipady =0;
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.gridwidth =3; // GridBagConstraints.REMAINDER;
         principalePanel.add(titreImage, gbc);
         //---------------------------------------------
         //On positionne la case de départ du composant
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridx = 3;
-        gbc.gridy = 2;
+        gbc.gridx = 9;
+        gbc.gridy = 4;
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
-        gbc.gridheight= 1;
+        gbc.gridheight= 2;
         gbc.ipady =0;
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.gridwidth =3; //GridBagConstraints.REMAINDER;
         principalePanel.add(tagImage, gbc);
         //---------------------------------------------
         miniaturePanel.add(btPrecedent);
@@ -196,8 +202,11 @@ public class GuiView implements Observer {
         //On positionne la case de départ du composant
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridx = 1;
-        gbc.gridy = 3;
+        gbc.gridx = 0;
+        gbc.gridy = 7;
+        gbc.weightx = 0;
+        gbc.weighty = 0;
+        gbc.gridheight= 2;
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         principalePanel.add(miniaturePanel, gbc);
 
