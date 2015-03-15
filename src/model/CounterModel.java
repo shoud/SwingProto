@@ -14,9 +14,11 @@ public class CounterModel extends Observable
     private int valeur;
     //Le chemin de l'image courante
     private File file = null;
+    private File fileImage = null;
     private String emplacement;
     private String imageCourante;
     private String nomImage;
+    private String tagsImage = null;
     private String dossier = null;
     private File fileDossier = null;
     private File[] images = null;
@@ -56,6 +58,8 @@ public class CounterModel extends Observable
                 this.file = file;
                 dossier = file.getPath().toString();
                 dossier = dossier.substring(0, dossier.length() - this.nomImage.length());
+                String str = this.dossier.toString() + this.file.toString();
+                this.tagsImage = Tags.getTags(str);
             }
             else
             {
@@ -64,6 +68,7 @@ public class CounterModel extends Observable
                 dossier = dossier.substring(0, dossier.length() - this.nomImage.length());
                 nomImage = null;
                 this.file = null;
+                this.tagsImage = null;
             }
         }
         else
@@ -117,13 +122,56 @@ public class CounterModel extends Observable
         setChanged();
         notifyObservers();
     }
-    public void modifier(String nom)
+    public void modifier(String nom, String tags)
     {
         if(nom != null)
         {
-            this.nomImage = nom;
-            file.renameTo(new File(dossier + this.nomImage));
+            String str;
+            if(!this.nomImage.equals(nom))
+            {
+                str = this.dossier.toString() + this.nomImage.toString();
+                Tags.deleteTags(str);
+                this.nomImage = nom;
+                this.file.renameTo(new File(dossier + this.nomImage));
+            }
+            this.tagsImage = tags;
+            str = this.dossier.toString() + this.nomImage.toString();
+            Tags.setTags(str,tags);
+
         }
+        setChanged();
+        notifyObservers();
+    }
+    public void rechercher(String tags)
+    {
+        listeMiniatures.clear();
+        this.file = null;
+        this.imageCourante = null;
+        for(String f:Tags.recherche(tags))
+            listeMiniatures.add(new File(f));
+        if(!listeMiniatures.isEmpty())
+        {
+            index = 0;
+            int compteur = 0;
+            liste.clear();
+            listeMiniaturesAffichable.clear();
+            it = listeMiniatures.iterator();
+            while((it.hasNext()))
+            {
+                listeMiniaturesAffichable.add(it.next());
+                compteur++;
+                if(compteur > 3 )
+                {
+                    liste.add((ArrayList<File>) listeMiniaturesAffichable.clone());
+                    listeMiniaturesAffichable.clear();
+                    compteur = 0;
+                }
+            }
+            if (!listeMiniaturesAffichable.isEmpty())
+                liste.add((ArrayList<File>) listeMiniaturesAffichable.clone());
+            listeMiniaturesAffichable.clear();
+        }
+        listePrecedente.clear();
         setChanged();
         notifyObservers();
     }
@@ -131,6 +179,7 @@ public class CounterModel extends Observable
     {
         return this.nomImage;
     }
+    public String getTagsImage() {return this.tagsImage;}
     public File getFile()
     {
         return this.file;
@@ -171,13 +220,18 @@ public class CounterModel extends Observable
             {
                 String extension = null;
                 this.file = this.liste.get(this.index).get(index);
+                this.tagsImage = Tags.getTags(this.file.toString());
                 String chemin = this.file.toString();
                 int pos = chemin.lastIndexOf('/');
                 if (pos > 0 && pos < chemin.length() - 1) {
                     extension = chemin.substring(pos + 1).toLowerCase();
                 }
                 if (extension != null)
+                {
                     this.nomImage = extension;
+                    dossier = file.getPath().toString();
+                    dossier = dossier.substring(0, dossier.length() - this.nomImage.length());
+                }
                 setChanged();
                 notifyObservers();
             }

@@ -26,13 +26,12 @@ public class PImage extends JButton
         try
         {
             ///home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif
-            // file = new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif");
-            file = new File("D:/GitHub/SwingProto/src/rsc/default.gif");
+            file = new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif");
             image = ImageIO.read(file);
             //this.setIcon((Icon) image);
         }catch (IOException ex)
         {
-            System.out.println("Impossible d'ouvrir l'image par defaut ici");
+            System.out.println("Impossible d'ouvrir l'image par defaut");
         }
     }
     public PImage(File file)
@@ -53,7 +52,7 @@ public class PImage extends JButton
 
         }catch (IOException ex)
         {
-            System.out.println("Impossible d'ouvrir l'image par defaut la");
+            System.out.println("Impossible d'ouvrir l'image par defaut");
         }
     }
     public void setImage(File file)
@@ -71,7 +70,7 @@ public class PImage extends JButton
 
             }catch (IOException ex)
             {
-                System.out.println("Impossible d'ouvrir l'image par defaut encore");
+                //System.out.println("Impossible d'ouvrir l'image par defaut");
             }
         }
     }

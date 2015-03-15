@@ -35,7 +35,9 @@ public class CounterController implements ActionListener
     public void actionPerformed(ActionEvent e)
     {
         if (e.getSource() == m_view.getBtModifier())
-            m_model.modifier(m_view.getNomImage());
+            m_model.modifier(m_view.getNomImage(), m_view.getTagImage());
+        if(e.getSource() == m_view.getBtRechercher())
+            m_model.rechercher(m_view.getTagRecherche());
         if (e.getSource() == m_view.getBtPrecedent())
             m_model.precedent();
         if (e.getSource() == m_view.getBtSuivant())

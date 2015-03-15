@@ -18,7 +18,7 @@ public class Miniature extends JPanel
     public void paintComponent(Graphics g){
         try {
             //Le chemin de l'image
-            file = new File("D:/GitHub/SwingProto/src/rsc/default.gif");
+            file = new File("/home/thomas/IdeaProjects/SwingProto/src/rsc/default.gif");
             img = ImageIO.read(file);
             //Permet d'afficher l'image dans tout le JPanel
             g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
